@@ -19,29 +19,21 @@ function copyPhoneFromProfileDetails() {
             const phone = phoneElement.innerText.replace(/\D/g, '')
                 .replace('972', '0');
             navigator.clipboard.writeText(phone);
-            phoneAncore.innerText = '✅';
+
             setTimeout(() => {
               phoneAncore.innerText = '☎️';
               document.querySelector('[aria-label="Close"]').click();
-            }, 1000);
+                setTimeout(() => {
+                    phoneAncore.innerText = '✅';
+                    setTimeout(() => {
+                        phoneAncore.innerText = '☎️';
+                    });
+                }, 1000);
+            }, 500);
           }
         }, 1000);
       });
         profileDetails.setAttribute('copy-event-added', 'true');
-      // setTimeout(() => {
-      //   const phoneElement = document.querySelector(':has(>h2)').childNodes[1];
-      //     if (phoneElement && !phoneElement.getAttribute('copy-event-added')) {
-      //
-      //       phoneAncore.addEventListener("click", (evt) => {
-      //       navigator.clipboard.writeText(phoneElement.innerText);
-      //       phoneAncore.innerText = '✅';
-      //       setTimeout(() => {
-      //           phoneAncore.innerText = '☎️';
-      //       }, 1000);
-      //       });
-      //       phoneElement.setAttribute('copy-event-added', 'true');
-      //   }
-      //   }, 1000);
     }
 }
 
