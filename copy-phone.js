@@ -14,7 +14,7 @@ function copyPhoneFromProfileDetails() {
       phoneAncore.addEventListener('click', (evt) => {
         profileDetails.click();
         setTimeout(() => {
-          const phoneElement = document.querySelector(':has(>h2)').childNodes[1];
+          const phoneElement = document.querySelector(':has(>h2)')?.childNodes[1];
           if (phoneElement) {
             const phone = phoneElement.innerText.replace(/\D/g, '')
                 .replace('972', '0');
@@ -23,8 +23,9 @@ function copyPhoneFromProfileDetails() {
             setTimeout(() => {
               phoneAncore.innerText = '☎️';
               document.querySelector('[aria-label="Close"]').click();
+              phoneAncore.innerText = '✅';
                 setTimeout(() => {
-                    phoneAncore.innerText = '✅';
+
                     setTimeout(() => {
                         phoneAncore.innerText = '☎️';
                     });
@@ -49,7 +50,7 @@ function addCopyPhoneCapability() {
         const phone = item.innerText.replace(/\D/g, '')
             .replace('972', '0');
         navigator.clipboard.writeText(phone);
-          phoneAncore.innerText = '✅';
+        phoneAncore.innerText = '✅';
           setTimeout(() => {
             phoneAncore.innerText = '☎️';
           }, 1000);
