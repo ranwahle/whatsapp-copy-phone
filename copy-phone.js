@@ -22,7 +22,7 @@ function copyPhoneFromProfileDetails() {
 
             setTimeout(() => {
               phoneAncore.innerText = '☎️';
-              document.querySelector('div[role="button"] span[daata-icon="x"]').click();
+              document.querySelector('div[role="button"] span[data-icon="x"]').click();
               phoneAncore.innerText = '✅';
                 setTimeout(() => {
 
