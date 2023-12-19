@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
 });
 
 function copyPhoneFromProfileDetails() {
-  const profileDetails = document.querySelector('[title="Profile Details"]');
+  const profileDetails = document.querySelector('div [id="main"] header div');
     if (profileDetails && !profileDetails.getAttribute('copy-event-added')) {
       const phoneAncore = document.createElement('a');
       phoneAncore.href = 'javascript:void(0)';
