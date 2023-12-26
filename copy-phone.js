@@ -14,7 +14,7 @@ function copyPhoneFromProfileDetails() {
       phoneAncore.addEventListener('click', (evt) => {
         profileDetails.click();
         setTimeout(() => {
-          const phoneElement = document.querySelector(':has(>h2)')?.childNodes[1];
+          const phoneElement = document.querySelector(':has(>h2)');
           if (phoneElement) {
             const phone = phoneElement.innerText.replace(/\D/g, '')
                 .replace('972', '0');
