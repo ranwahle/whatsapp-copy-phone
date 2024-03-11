@@ -1,9 +1,13 @@
 {
   "name": "Copy mobile phone from whatsapp message",
   "description": "Automatically copies the mobile phone number from a whatsapp message to the clipboard.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "manifest_version": 3,
-  "permissions": [],
+  "permissions": [
+    "clipboardWrite"
+  
+  ],
+
   "content_scripts": [
     {
       "matches": ["https://*.whatsapp.com/*"],
