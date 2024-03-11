@@ -50,14 +50,6 @@ function copyPhoneFromProfileDetails() {
       });
         profileDetails.setAttribute('copy-event-added', 'true');
     }
-  // const header = profileDetails.parentElement;
-  // const phoneNumberContainer = header.lastChild;
-  // if (phoneNumberContainer) {
-  //   const phone = phoneNumberContainer.innerText.replace(/\D/g, '')
-  //   .replace('972', '0');
-  //   phoneNumberContainer.innerText = phone;
-  // }
-  
 }
 
 function addCopyPhoneCapability() {
