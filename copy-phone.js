@@ -1,6 +1,8 @@
 window.addEventListener("load", () => {
- addCopyPhoneCapability();
-  setInterval(copyPhoneFromProfileDetails, 1000);
+  setInterval(() => {
+    addCopyPhoneCapability();
+    copyPhoneFromProfileDetails();
+  }, 1000);
 });
 
 async function getPhoneFromProfileDetails(phoneAncore) {
@@ -10,6 +12,7 @@ async function getPhoneFromProfileDetails(phoneAncore) {
         .replace('972', '0');
       try {
         await navigator.clipboard.writeText(phone);
+        document.querySelector('div[role="button"] span[data-icon="x"]').click();
         setTimeout(() => {
 
           phoneAncore.innerText = '✅';
@@ -53,11 +56,9 @@ function copyPhoneFromProfileDetails() {
 }
 
 function addCopyPhoneCapability() {
-  document.querySelectorAll('[testId="author"]').forEach((item) => {
+  document.querySelectorAll('[role="button"][aria-label^="Open chat details for"]').forEach((item) => {
     if (!item.getAttribute('copy-event-added')) {
-      const phone = item.innerText.replace(/\D/g, '')
-      .replace('972', '0');
-      item.innerText = phone;
+    
       const phoneAncore = document.createElement('a');
       phoneAncore.href = 'javascript:void(0)';
         phoneAncore.innerText = '☎️';
@@ -65,19 +66,8 @@ function addCopyPhoneCapability() {
 
       phoneAncore.addEventListener("click", async () => {
      
-        // await navigator.clipboard.writeText(phone);
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('allow', 'clipboard-write; clipboard-read');
-       
-        setTimeout(async () => {
-          await navigator.clipboard.writeText(phone);
-
-          iframe.remove();
-        }, 1000);
-        phoneAncore.innerText = '✅';
-          setTimeout(() => {
-            phoneAncore.innerText = '☎️';
-          }, 1000);
+        item.click();
+        setTimeout(() => getPhoneFromProfileDetails(phoneAncore), 1000);
       });
       item.setAttribute('copy-event-added', 'true');
     }
