@@ -5,8 +5,14 @@ window.addEventListener("load", () => {
   }, 1000);
 });
 
+function getPhoneElementForBusiness() {
+  const copyableTextElements = document.querySelectorAll('span.copyable-text');
+  return Array.from(copyableTextElements).find(span => span.innerText.startsWith('+'))
+   
+}
+
 async function getPhoneFromProfileDetails(phoneAncore) {
-    const phoneElement = document.querySelector(':has(>h2)');
+    const phoneElement = document.querySelector(':has(>h2)') || getPhoneElementForBusiness();
     if (phoneElement) {
       const phone = phoneElement.innerText.replace(/\D/g, '')
         .replace('972', '0');
