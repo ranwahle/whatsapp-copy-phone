@@ -12,13 +12,14 @@ function getPhoneElementForBusiness() {
 }
 
 async function getPhoneFromProfileDetails(phoneAncore) {
+  const cloaseButtonQuery = 'div[role="button"][aria-label="Close]"';
     const phoneElement = document.querySelector(':has(>h2)') || getPhoneElementForBusiness();
     if (phoneElement) {
       const phone = phoneElement.innerText.replace(/\D/g, '')
         .replace('972', '0');
       try {
         await navigator.clipboard.writeText(phone);
-        document.querySelector('div[role="button"] span[data-icon="x"]').click();
+        document.querySelector(cloaseButtonQuery).click();
         setTimeout(() => {
 
           phoneAncore.innerText = '✅';
@@ -32,7 +33,7 @@ async function getPhoneFromProfileDetails(phoneAncore) {
       } catch (e) {
         console.error(e);
         setTimeout(() => {
-          document.querySelector('div[role="button"] span[data-icon="x"]').click();
+          document.querySelector(cloaseButtonQuery).click();
           const div = document.createElement('div');
           div.innerText = `${phone}`;
           div.setAttribute('contentEditable', 'true');
