@@ -7,19 +7,30 @@ window.addEventListener("load", () => {
 
 function getPhoneElementForBusiness() {
   const copyableTextElements = document.querySelectorAll('span.copyable-text');
-  return Array.from(copyableTextElements).find(span => span.innerText.startsWith('+'))
+  const englishPredicate = span => span.innerText.startsWith('+')
+  const hebreqPreficate = span => span.innerText.charAt(1) === '+';
+  return Array.from(copyableTextElements).find(span => englishPredicate(span) || hebreqPreficate(span))
    
 }
 
+function getCloseButton() {
+const closeButtonQueryEnglish = 'div[role="button"][aria-label="Close"]';
+  const cloaseButtonQueryHebrew = 'div[role="button"][aria-label="סגירה"]';
+     const closeButton = document.querySelector(closeButtonQueryEnglish) || document.querySelector(cloaseButtonQueryHebrew);
+  return closeButton;
+}
+
+
 async function getPhoneFromProfileDetails(phoneAncore) {
-  const cloaseButtonQuery = 'div[role="button"][aria-label="Close"]';
-    const phoneElement = document.querySelector(':has(>h2)') || getPhoneElementForBusiness();
+  
+  const phoneElement = document.querySelector(':has(>h2)') || getPhoneElementForBusiness();
     if (phoneElement) {
       const phone = phoneElement.innerText.replace(/\D/g, '')
         .replace('972', '0');
       try {
         await navigator.clipboard.writeText(phone);
-        document.querySelector(cloaseButtonQuery).click();
+        const closeButton = getCloseButton();
+        closeButton.click();
         setTimeout(() => {
 
           phoneAncore.innerText = '✅';
@@ -33,7 +44,7 @@ async function getPhoneFromProfileDetails(phoneAncore) {
       } catch (e) {
         console.error(e);
         setTimeout(() => {
-          document.querySelector(cloaseButtonQuery).click();
+          getCloseButton().click();
           const div = document.createElement('div');
           div.innerText = `${phone}`;
           div.setAttribute('contentEditable', 'true');
@@ -63,7 +74,13 @@ function copyPhoneFromProfileDetails() {
 }
 
 function addCopyPhoneCapability() {
-  document.querySelectorAll('[role="button"][aria-label^="Open chat details for"]').forEach((item) => {
+  const hebrewLabelPrefix =  `פתיחת פרטי הצ'אט עם`;
+  const englishLabelPrefix = 'Open chat details for';
+  const phoneElements = [...Array.from( document.querySelectorAll(`[role="button"][aria-label^="${englishLabelPrefix}"]`))
+    , ...Array.from(document.querySelectorAll(`[role="button"][aria-label^="${hebrewLabelPrefix}"]`))
+  ];
+
+ phoneElements.forEach((item) => {
     if (!item.getAttribute('copy-event-added')) {
     
       const phoneAncore = document.createElement('a');
