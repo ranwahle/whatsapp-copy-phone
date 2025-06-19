@@ -12,7 +12,7 @@ function getPhoneElementForBusiness() {
 }
 
 async function getPhoneFromProfileDetails(phoneAncore) {
-  const cloaseButtonQuery = 'div[role="button"][aria-label="Close]"';
+  const cloaseButtonQuery = 'div[role="button"][aria-label="Close"]';
     const phoneElement = document.querySelector(':has(>h2)') || getPhoneElementForBusiness();
     if (phoneElement) {
       const phone = phoneElement.innerText.replace(/\D/g, '')
