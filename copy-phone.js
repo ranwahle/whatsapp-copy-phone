@@ -14,10 +14,17 @@ function getPhoneElementForBusiness() {
 }
 
 function getCloseButton() {
-const closeButtonQueryEnglish = 'button[aria-label="Close"]';
-const cloaseButtonQueryHebrew = 'button[aria-label="סגירה"]';
-const closeButtonQueryGtoupHebrew= 'button[aria-label="חזרה"]';
-const closeButtonQueryGtoupEnglish= 'button[aria-label="Back"]';
+const ariaLabels =  {
+  hebrewContact: 'סגירה',
+  hebrewGroup: 'חזרה',
+  englishContact: 'Close',
+  englishGroup: 'Back';
+
+}
+const closeButtonQueryEnglish = `button[aria-label="${ariaLabels.englishContact}"]`;
+const cloaseButtonQueryHebrew = `button[aria-label="${ariaLabels.hebrewContact}"]`;
+const closeButtonQueryGtoupHebrew= `button[aria-label="${ariaLabels.hebrewGroup}"]'`
+const closeButtonQueryGtoupEnglish= `button[aria-label="${ariaLabels.englishGroup}"]`;
 
      const closeButton = document.querySelector(closeButtonQueryEnglish) || 
      document.querySelector(closeButtonQueryGtoupEnglish) || 
