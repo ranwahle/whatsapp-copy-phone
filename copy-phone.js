@@ -14,16 +14,32 @@ function getPhoneElementForBusiness() {
 }
 
 function getCloseButton() {
-const closeButtonQueryEnglish = 'div[role="button"][aria-label="Close"]';
-  const cloaseButtonQueryHebrew = 'div[role="button"][aria-label="סגירה"]';
-     const closeButton = document.querySelector(closeButtonQueryEnglish) || document.querySelector(cloaseButtonQueryHebrew);
+const ariaLabels =  {
+  hebrewContact: 'סגירה',
+  hebrewGroup: 'חזרה',
+  englishContact: 'Close',
+  englishGroup: 'Back';
+
+}
+const closeButtonQueryEnglish = `button[aria-label="${ariaLabels.englishContact}"]`;
+const cloaseButtonQueryHebrew = `button[aria-label="${ariaLabels.hebrewContact}"]`;
+const closeButtonQueryGtoupHebrew= `button[aria-label="${ariaLabels.hebrewGroup}"]'`
+const closeButtonQueryGtoupEnglish= `button[aria-label="${ariaLabels.englishGroup}"]`;
+
+     const closeButton = document.querySelector(closeButtonQueryEnglish) || 
+     document.querySelector(closeButtonQueryGtoupEnglish) || 
+document.querySelector(closeButtonQueryGtoupHebrew) || 
+     document.querySelector(cloaseButtonQueryHebrew);
   return closeButton;
 }
 
+function getPhoneNumber() {
+return  Array.from(document.querySelectorAll('div.copyable-area section span[dir="auto"].copyable-text.selectable-text')).find(item => item.innerText.startsWith('+'));
+}
 
 async function getPhoneFromProfileDetails(phoneAncore) {
   
-  const phoneElement = document.querySelector(':has(>h2)') || getPhoneElementForBusiness();
+  const phoneElement =getPhoneNumber() || getPhoneElementForBusiness();
     if (phoneElement) {
       const phone = phoneElement.innerText.replace(/\D/g, '')
         .replace('972', '0');
