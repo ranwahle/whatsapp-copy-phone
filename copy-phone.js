@@ -18,8 +18,7 @@ const ariaLabels =  {
   hebrewContact: 'סגירה',
   hebrewGroup: 'חזרה',
   englishContact: 'Close',
-  englishGroup: 'Back';
-
+  englishGroup: 'Back'
 }
 const closeButtonQueryEnglish = `button[aria-label="${ariaLabels.englishContact}"]`;
 const cloaseButtonQueryHebrew = `button[aria-label="${ariaLabels.hebrewContact}"]`;
