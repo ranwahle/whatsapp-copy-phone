@@ -22,7 +22,7 @@ const ariaLabels =  {
 }
 const closeButtonQueryEnglish = `button[aria-label="${ariaLabels.englishContact}"]`;
 const cloaseButtonQueryHebrew = `button[aria-label="${ariaLabels.hebrewContact}"]`;
-const closeButtonQueryGtoupHebrew= `button[aria-label="${ariaLabels.hebrewGroup}"]'`
+const closeButtonQueryGtoupHebrew= `button[aria-label="${ariaLabels.hebrewGroup}"]`
 const closeButtonQueryGtoupEnglish= `button[aria-label="${ariaLabels.englishGroup}"]`;
 
      const closeButton = document.querySelector(closeButtonQueryEnglish) || 
@@ -33,7 +33,9 @@ document.querySelector(closeButtonQueryGtoupHebrew) ||
 }
 
 function getPhoneNumber() {
-return  Array.from(document.querySelectorAll('div.copyable-area section span[dir="auto"].copyable-text.selectable-text')).find(item => item.innerText.startsWith('+'));
+const phoneNumberElement =  Array.from(document.querySelectorAll('div.copyable-area section span[dir="auto"].copyable-text.selectable-text')).find(item => item.innerText.startsWith('+'));
+
+return phoneNumberElement;
 }
 
 async function getPhoneFromProfileDetails(phoneAncore) {
@@ -74,7 +76,7 @@ async function getPhoneFromProfileDetails(phoneAncore) {
 }
 
 function copyPhoneFromProfileDetails() {
-  const profileDetails = document.querySelector('div [id="main"] header div');
+  const profileDetails = document.querySelector('div [id="main"] header div div[role="button"]');
     if (profileDetails && !profileDetails.getAttribute('copy-event-added')) {
       const phoneAncore = document.createElement('a');
       phoneAncore.href = 'javascript:void(0)';
